@@ -1,0 +1,1011 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>6 Months of Us</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Great+Vibes&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fff6f1;
+      --paper: #fff9f8;
+      --rose: #d85a79;
+      --rose-soft: #f7ccd5;
+      --wine: #702836;
+      --blush: #ffe2de;
+      --gold: #ca9f67;
+      --ink: #311f24;
+      --shadow: 0 22px 50px rgba(112, 40, 54, 0.19);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Manrope", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 15%, #ffd4db 0%, transparent 34%),
+        radial-gradient(circle at 84% 10%, #ffe4cf 0%, transparent 35%),
+        radial-gradient(circle at 50% 100%, #ffd7df 0%, transparent 42%),
+        linear-gradient(140deg, #fff8f4, #ffece6 55%, #fff6f3);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 16% 70%, rgba(216, 90, 121, 0.1) 0 7px, transparent 8px),
+        radial-gradient(circle at 88% 62%, rgba(216, 90, 121, 0.09) 0 6px, transparent 7px),
+        radial-gradient(circle at 40% 32%, rgba(216, 90, 121, 0.08) 0 5px, transparent 6px);
+    }
+
+    .intro-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 8;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255, 176, 194, 0.5), transparent 40%),
+        radial-gradient(circle at 85% 82%, rgba(255, 209, 176, 0.45), transparent 45%),
+        linear-gradient(160deg, rgba(255, 247, 244, 0.98), rgba(255, 235, 231, 0.98));
+      backdrop-filter: blur(5px);
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .intro-overlay.hide {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .prompt-box {
+      width: min(390px, 100%);
+      min-height: min(76vh, 640px);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 244, 243, 0.95)),
+        var(--paper);
+      border: 1px solid rgba(112, 40, 54, 0.22);
+      border-radius: 30px;
+      box-shadow: 0 24px 52px rgba(112, 40, 54, 0.26);
+      padding: 24px 20px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: popIn 0.7s ease both;
+    }
+
+    .prompt-box::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border-radius: 22px;
+      border: 1px solid rgba(216, 90, 121, 0.24);
+      pointer-events: none;
+    }
+
+    .prompt-kicker {
+      font-family: "Cormorant Garamond", serif;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #914354;
+      font-weight: 700;
+      font-size: 0.82rem;
+      margin-bottom: 12px;
+    }
+
+    .prompt-gif {
+      width: clamp(170px, 42vw, 240px);
+      height: auto;
+      image-rendering: -webkit-optimize-contrast;
+      filter: drop-shadow(0 8px 18px rgba(216, 90, 121, 0.28));
+      margin-bottom: 14px;
+    }
+
+    .prompt-middle {
+      margin: auto 0;
+      display: grid;
+      gap: 12px;
+      place-items: center;
+    }
+
+    .prompt-script {
+      font-family: "Great Vibes", cursive;
+      color: var(--rose);
+      font-size: clamp(1.5rem, 4vw, 2.1rem);
+      line-height: 1;
+    }
+
+    .prompt-title {
+      font-family: "Cormorant Garamond", serif;
+      color: var(--wine);
+      font-size: clamp(2rem, 6vw, 2.8rem);
+      line-height: 1.08;
+    }
+
+    .prompt-date {
+      color: #6a3d46;
+      font-size: 0.98rem;
+      letter-spacing: 0.04em;
+    }
+
+    .next-btn {
+      border: 0;
+      background: linear-gradient(125deg, #d85374, #aa3857);
+      color: #fff;
+      font-family: "Manrope", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      border-radius: 999px;
+      padding: 12px 22px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      box-shadow: 0 12px 24px rgba(168, 56, 87, 0.35);
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .next-btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      filter: brightness(1.04);
+    }
+
+    .next-btn:active {
+      transform: translateY(0);
+    }
+
+    .next-btn:focus-visible {
+      outline: 2px solid #8a2941;
+      outline-offset: 3px;
+    }
+
+    .back-btn {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 7;
+      border: 1px solid rgba(112, 40, 54, 0.24);
+      background: linear-gradient(125deg, #fff8f8, #ffe9ec);
+      color: #7a2c3a;
+      font-family: "Manrope", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 0.88rem;
+      cursor: pointer;
+      box-shadow: 0 10px 22px rgba(112, 40, 54, 0.18);
+      transition: opacity 0.25s ease, transform 0.25s ease, filter 0.2s ease;
+    }
+
+    .back-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.02);
+    }
+
+    .back-btn:focus-visible {
+      outline: 2px solid #8a2941;
+      outline-offset: 3px;
+    }
+
+    body.intro-open .back-btn {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-8px);
+    }
+
+    .glow {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 999px;
+      filter: blur(68px);
+      opacity: 0.42;
+      pointer-events: none;
+      z-index: 0;
+      animation: drift 11s ease-in-out infinite alternate;
+    }
+
+    .glow.one {
+      top: -50px;
+      left: -40px;
+      background: #ff9eb2;
+    }
+
+    .glow.two {
+      bottom: -80px;
+      right: -20px;
+      background: #ffd6a8;
+      animation-delay: 1.2s;
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      width: min(920px, 100%);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(255, 246, 244, 0.95)),
+        var(--paper);
+      border: 1px solid rgba(112, 40, 54, 0.18);
+      border-radius: 28px;
+      padding: clamp(24px, 4vw, 42px);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(4px);
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(216, 90, 121, 0.2);
+      pointer-events: none;
+    }
+
+    .hearts {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: 0.35;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 14px;
+      color: var(--rose);
+      animation: floatUp linear infinite;
+    }
+
+    .heart:nth-child(1) { left: 8%; animation-duration: 9s; animation-delay: 0s; }
+    .heart:nth-child(2) { left: 22%; animation-duration: 7s; animation-delay: 1.5s; }
+    .heart:nth-child(3) { left: 38%; animation-duration: 8.5s; animation-delay: 0.6s; }
+    .heart:nth-child(4) { left: 57%; animation-duration: 10s; animation-delay: 2.1s; }
+    .heart:nth-child(5) { left: 73%; animation-duration: 7.8s; animation-delay: 0.9s; }
+    .heart:nth-child(6) { left: 88%; animation-duration: 9.8s; animation-delay: 2.6s; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.86rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--wine);
+      background: linear-gradient(90deg, #ffe7ea, #ffd7dd);
+      border: 1px solid rgba(112, 40, 54, 0.24);
+      padding: 9px 14px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+      transform: translateY(14px);
+      opacity: 0;
+      animation: reveal 0.7s ease forwards;
+    }
+
+    .ribbon {
+      display: inline-block;
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fffaf7;
+      background: linear-gradient(120deg, #cf4d6f, #a83756);
+      border-radius: 10px;
+      padding: 8px 12px;
+      margin-bottom: 12px;
+      box-shadow: 0 10px 20px rgba(112, 40, 54, 0.25);
+      transform: translateY(14px);
+      opacity: 0;
+      animation: reveal 0.72s ease forwards;
+      animation-delay: 0.02s;
+    }
+
+    .script-line {
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--rose);
+      line-height: 0.9;
+      margin-bottom: 8px;
+      transform: translateY(16px);
+      opacity: 0;
+      animation: reveal 0.75s ease forwards;
+      animation-delay: 0.08s;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .title-heart {
+      font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+      color: var(--rose);
+      text-shadow: 0 0 14px rgba(216, 90, 121, 0.35);
+      transform: translateY(16px);
+      opacity: 0;
+      animation: reveal 0.75s ease forwards, pulse 2s ease-in-out infinite;
+      animation-delay: 0.12s, 0.9s;
+    }
+
+    h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1.05;
+      color: var(--wine);
+      margin-bottom: 12px;
+      transform: translateY(16px);
+      opacity: 0;
+      animation: reveal 0.75s ease forwards;
+      animation-delay: 0.1s;
+    }
+
+    .subtitle {
+      max-width: 62ch;
+      font-size: clamp(1rem, 2.2vw, 1.12rem);
+      line-height: 1.7;
+      color: #5b3a41;
+      margin-bottom: 26px;
+      transform: translateY(16px);
+      opacity: 0;
+      animation: reveal 0.75s ease forwards;
+      animation-delay: 0.2s;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .tile {
+      background: linear-gradient(170deg, #fff6f2, #ffece4);
+      border: 1px solid rgba(122, 46, 58, 0.15);
+      border-radius: 16px;
+      padding: 16px;
+      transform: translateY(16px);
+      opacity: 0;
+      animation: reveal 0.75s ease forwards;
+    }
+
+    .tile:nth-child(1) { animation-delay: 0.28s; }
+    .tile:nth-child(2) { animation-delay: 0.36s; }
+    .tile:nth-child(3) { animation-delay: 0.44s; }
+
+    .tile-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #865058;
+      margin-bottom: 7px;
+    }
+
+    .tile-value {
+      font-size: clamp(1.03rem, 2vw, 1.18rem);
+      font-weight: 600;
+      color: #3a2328;
+    }
+
+    .book-stage {
+      margin-top: 16px;
+      perspective: 2200px;
+      transform: translateY(16px);
+      opacity: 0;
+      animation: reveal 0.78s ease forwards;
+      animation-delay: 0.58s;
+    }
+
+    .book {
+      position: relative;
+      min-height: clamp(460px, 64vw, 600px);
+      transform-style: preserve-3d;
+      isolation: isolate;
+    }
+
+    .book::before {
+      content: "";
+      position: absolute;
+      inset: 16px 8px 4px;
+      border-radius: 18px;
+      background: linear-gradient(160deg, rgba(112, 40, 54, 0.18), rgba(112, 40, 54, 0.04));
+      filter: blur(10px);
+      opacity: 0.35;
+      transform: translateY(6px);
+      z-index: 0;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .book.open::before,
+    .book.open::before {
+      opacity: 0.5;
+      transform: translateY(10px) scaleX(1.02);
+    }
+
+    .book-page {
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      padding: 20px 20px 80px;
+      overflow: auto;
+      border: 1px solid rgba(112, 40, 54, 0.16);
+      box-shadow: 0 12px 28px rgba(112, 40, 54, 0.12);
+      transform-style: preserve-3d;
+    }
+
+    .book-front {
+      z-index: 2;
+      transform-origin: left center;
+      transform: rotateY(0deg);
+      transition: transform 1.2s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 1.2s ease, filter 1.2s ease;
+      backface-visibility: hidden;
+      background:
+        linear-gradient(160deg, rgba(255, 248, 251, 0.42), rgba(255, 250, 245, 0.46)),
+        url("https://img.freepik.com/premium-vector/pink-gradient-background-heart-shape-bokeh-light-element-love-valentine-theme_58717-1556.jpg?semt=ais_hybrid&w=740&q=80");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-blend-mode: soft-light;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 12px;
+      will-change: transform;
+      overflow: hidden;
+      filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.06));
+    }
+
+    .book-front::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 24px;
+      background: linear-gradient(to left, rgba(90, 35, 46, 0.24), transparent);
+      opacity: 0.24;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+    }
+
+    .book-front::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(100deg, rgba(111, 44, 58, 0.22), rgba(255, 255, 255, 0.03) 45%, rgba(111, 44, 58, 0.18));
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.55s ease;
+    }
+
+    .book.open .book-front {
+      transform: rotateY(-166deg) translateX(-4px);
+      box-shadow: 16px 16px 28px rgba(112, 40, 54, 0.2);
+      filter: drop-shadow(8px 6px 12px rgba(112, 40, 54, 0.14));
+    }
+
+    .book.open .book-front::before {
+      opacity: 0.62;
+    }
+
+    .book.open .book-front::after {
+      opacity: 1;
+    }
+
+    .book-back {
+      z-index: 1;
+      background: linear-gradient(155deg, #fff8f6, #fff4f8);
+      transform: translateZ(-1px);
+    }
+
+    .book-kicker {
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #8f4a59;
+      font-weight: 700;
+      text-shadow: 0 2px 10px rgba(216, 90, 121, 0.2);
+    }
+
+    .book-title-wrap {
+      position: relative;
+      width: min(700px, 100%);
+      margin: 2px auto 2px;
+      padding: 28px clamp(112px, 22vw, 160px) 0;
+    }
+
+    .book-title-wrap::before,
+    .book-title-wrap::after {
+      content: "❤";
+      position: absolute;
+      top: -18px;
+      font-size: 0.95rem;
+      color: #d85374;
+      opacity: 0.75;
+      text-shadow: 0 0 12px rgba(216, 90, 121, 0.35);
+      animation: sparkleHeart 2.6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .book-title-wrap::before {
+      left: 30%;
+    }
+
+    .book-title-wrap::after {
+      right: 30%;
+      animation-delay: 1.2s;
+    }
+
+    .book-heading {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      color: #80283b;
+      line-height: 1.08;
+      text-shadow: 0 4px 14px rgba(216, 90, 121, 0.2);
+      position: relative;
+      z-index: 3;
+    }
+
+    .book-caption {
+      max-width: 34ch;
+      line-height: 1.7;
+      color: #5f3a43;
+      margin-bottom: 6px;
+    }
+
+    .book-gif {
+      width: clamp(108px, 22vw, 152px);
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid rgba(112, 40, 54, 0.16);
+      box-shadow: 0 8px 16px rgba(112, 40, 54, 0.16);
+      position: absolute;
+      top: -24px;
+      z-index: 2;
+      animation: softFloat 3.4s ease-in-out infinite;
+    }
+
+    .book-gif-left {
+      left: 8px;
+    }
+
+    .book-gif-right {
+      right: 8px;
+      animation-delay: 1.2s;
+    }
+
+    .book-love-dots {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .book-love-dots span {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(216, 90, 121, 0.36);
+      filter: blur(0.3px);
+      animation: dotPulse 2.8s ease-in-out infinite;
+    }
+
+    .book-love-dots span:nth-child(1) { top: 20%; left: 18%; }
+    .book-love-dots span:nth-child(2) { top: 24%; right: 20%; animation-delay: 0.9s; }
+    .book-love-dots span:nth-child(3) { top: 42%; left: 12%; animation-delay: 1.6s; }
+    .book-love-dots span:nth-child(4) { top: 46%; right: 12%; animation-delay: 2.1s; }
+    .book-love-dots span:nth-child(5) { top: 58%; left: 24%; animation-delay: 0.5s; }
+    .book-love-dots span:nth-child(6) { top: 62%; right: 24%; animation-delay: 1.3s; }
+
+    .book-front-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .page-btn {
+      border: 0;
+      background: linear-gradient(125deg, #d85374, #aa3857);
+      color: #fff;
+      font-family: "Manrope", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      border-radius: 999px;
+      padding: 11px 18px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 0 12px 24px rgba(168, 56, 87, 0.28);
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .page-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.04);
+    }
+
+    .page-btn:focus-visible {
+      outline: 2px solid #8a2941;
+      outline-offset: 3px;
+    }
+
+    .page-nav-btn {
+      position: absolute;
+      left: 50%;
+      bottom: 20px;
+      transform: translateX(-50%);
+      margin: 0;
+      z-index: 3;
+    }
+
+    .page-nav-btn:hover {
+      transform: translate(-50%, -1px);
+    }
+
+    .page-nav-btn:active {
+      transform: translateX(-50%);
+    }
+
+    .letter-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.45rem, 3vw, 1.9rem);
+      color: var(--wine);
+      margin-bottom: 10px;
+    }
+
+    .letter-opening {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: #5d3640;
+      margin-bottom: 12px;
+    }
+
+    .letter-paragraph {
+      line-height: 1.78;
+      color: #56363d;
+      margin-bottom: 12px;
+    }
+
+    .letter-signoff {
+      margin-top: 14px;
+      font-size: 1rem;
+      color: #5a313a;
+      white-space: pre-line;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 0.92rem;
+      color: #7d4f57;
+      text-align: center;
+      transform: translateY(16px);
+      opacity: 0;
+      animation: reveal 0.8s ease forwards;
+      animation-delay: 0.62s;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100%) scale(1); opacity: 0; }
+      12% { opacity: 0.9; }
+      100% { transform: translateY(-120%) scale(1.25); opacity: 0; }
+    }
+
+    @keyframes reveal {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes drift {
+      from { transform: translate(0, 0); }
+      to { transform: translate(30px, 20px); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.16); }
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: translateY(16px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes softFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    @keyframes sparkleHeart {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.72; }
+      50% { transform: translateY(-4px) scale(1.12); opacity: 1; }
+    }
+
+    @keyframes dotPulse {
+      0%, 100% { transform: scale(0.8); opacity: 0.3; }
+      50% { transform: scale(1.35); opacity: 0.85; }
+    }
+
+    @media (max-width: 760px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        border-radius: 22px;
+      }
+
+      .script-line {
+        line-height: 1;
+      }
+
+      .title-row {
+        gap: 4px;
+      }
+
+      .back-btn {
+        top: 12px;
+        right: 12px;
+        padding: 9px 14px;
+      }
+
+      .book {
+        min-height: 680px;
+      }
+
+      .book-gif {
+        width: clamp(88px, 24vw, 118px);
+        top: -14px;
+      }
+
+      .book-title-wrap {
+        padding: 18px clamp(84px, 20vw, 108px) 0;
+      }
+
+      .book-gif-left {
+        left: 2px;
+      }
+
+      .book-gif-right {
+        right: 2px;
+      }
+
+      .book-title-wrap::before,
+      .book-title-wrap::after {
+        top: -12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      .badge,
+      .ribbon,
+      .script-line,
+      .title-heart,
+      h1,
+      .subtitle,
+      .tile,
+      .book-stage,
+      .footer {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      .heart {
+        display: none;
+      }
+
+      .prompt-box {
+        animation: none !important;
+      }
+
+      .book-front {
+        transition: transform 1.2s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 1.2s ease, filter 1.2s ease !important;
+      }
+    }
+  </style>
+</head>
+<body class="intro-open">
+  <div class="intro-overlay" id="introOverlay" role="dialog" aria-modal="true" aria-label="Anniversary Intro">
+    <section class="prompt-box">
+      <p class="prompt-kicker">For My Love</p>
+      <img
+        class="prompt-gif"
+        src="https://media.tenor.com/HbRnTD8i82YAAAAj/myaowl-cute.gif"
+        alt="Cute love gif"
+      />
+      <div class="prompt-middle">
+        <p class="prompt-script">A little surprise for you</p>
+        <h2 class="prompt-title">Happy 6 Months Anniversary</h2>
+        <p class="prompt-date">Since 20/10/25</p>
+      </div>
+      <button class="next-btn" id="nextBtn" type="button">Next!! &lt;3</button>
+    </section>
+  </div>
+  <button class="back-btn" id="backBtn" type="button" aria-label="Go back to intro">Go Back</button>
+
+  <div class="glow one"></div>
+  <div class="glow two"></div>
+
+  <main class="card">
+    <div class="hearts" aria-hidden="true">
+      <span class="heart">&#10084;</span>
+      <span class="heart">&#10084;</span>
+      <span class="heart">&#10084;</span>
+      <span class="heart">&#10084;</span>
+      <span class="heart">&#10084;</span>
+      <span class="heart">&#10084;</span>
+    </div>
+
+    <p class="ribbon">6 Months of Love</p>
+    <p class="badge">&#10084; Our beginning date: 20/10/25</p>
+    <p class="script-line">To my forever person</p>
+    <div class="title-row">
+      <h1>Happy 6 Months Anniversary, My Love</h1>
+      <span class="title-heart" aria-hidden="true">&#10084;</span>
+    </div>
+    <p class="subtitle">
+      Six months since <strong>20/10/25</strong>, and every day with you has felt warmer, lighter, and more meaningful.
+      Thank you for being my favorite part of life.
+    </p>
+
+    <section class="grid" aria-label="Anniversary Highlights">
+      <article class="tile">
+        <p class="tile-label">Together Since</p>
+        <p class="tile-value">20/10/25</p>
+      </article>
+      <article class="tile">
+        <p class="tile-label">Milestone</p>
+        <p class="tile-value">6 Beautiful Months</p>
+      </article>
+      <article class="tile">
+        <p class="tile-label">Days Shared</p>
+        <p class="tile-value" id="daysTogether">Counting...</p>
+      </article>
+    </section>
+
+    <section class="book-stage" aria-label="Turning Letter Book">
+      <div class="book" id="letterBook">
+        <article class="book-page book-front" aria-label="Front Page">
+          <div class="book-love-dots" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="book-front-content">
+            <p class="book-kicker">From My Heart</p>
+            <div class="book-title-wrap">
+              <img
+                class="book-gif book-gif-left"
+                src="https://i.pinimg.com/originals/49/f7/9c/49f79c18d52d885b3eca73c28ad3c11a.gif"
+                alt="Cute love gif one"
+              />
+              <img
+                class="book-gif book-gif-right"
+                src="https://i.pinimg.com/originals/ed/8f/61/ed8f61564a46f4b492490cef7326440a.gif"
+                alt="Cute love gif two"
+              />
+              <h2 class="book-heading">I Wrote You A Letter</h2>
+            </div>
+            <p class="book-caption">
+              Turn this page to read everything I wanted to say to you on our 6-month anniversary.
+            </p>
+          </div>
+          <button class="page-btn page-nav-btn" id="turnPageBtn" type="button">Next!!</button>
+        </article>
+        <article class="book-page book-back" aria-label="Letter Page">
+          <h2 class="letter-title">To my Evil Girlfriend,</h2>
+          <p class="letter-paragraph">
+            Happy anniversary. I still can't believe how lucky I am to have you in my life. The first day I met you, I
+            never thought it'd come to this. We started off as really great friends and took a step in our friendship
+            moving onto it becoming a relationship and I'm very glad we took that step.
+          </p>
+          <p class="letter-paragraph">
+            I appreciate you so much as you've always been there for me. All the times we played games and talked to
+            each other on call. Those moments will always be my favorite.
+          </p>
+          <p class="letter-paragraph">
+            The fact that its already been 6 months is crazy to me because it's half a year. Next month I will be moving
+            to Germany and I will be missing you a lot and I will definitely be sad. Although it is a very good
+            opportunity for me, all I want is to be with you.
+          </p>
+          <p class="letter-paragraph">
+            Germany is far from Myanmar so I really hope the distance wouldn't be much of an issue in our relationship.
+            Every night before sleeping I always pray for us to workout because I can't bare us being apart with all this
+            history we have together and I wish we're happily married in the future.
+          </p>
+          <p class="letter-paragraph">
+            Even though we're still young I have hope and I hope you do too. Lastly I want to mention that I love you
+            very much and you'll always be my one and only favorite person. Thank you.
+          </p>
+          <p class="letter-signoff">Love you most,
+Hein</p>
+          <button class="page-btn page-nav-btn" id="turnBackBtn" type="button">Back</button>
+        </article>
+      </div>
+    </section>
+
+    <p class="footer">From 20/10/25 to forever.</p>
+  </main>
+
+  <script>
+    (function () {
+      var pageBody = document.body;
+      var introOverlay = document.getElementById("introOverlay");
+      var nextBtn = document.getElementById("nextBtn");
+      var backBtn = document.getElementById("backBtn");
+      var letterBook = document.getElementById("letterBook");
+      var turnPageBtn = document.getElementById("turnPageBtn");
+      var turnBackBtn = document.getElementById("turnBackBtn");
+      var startDate = new Date("2025-10-20T00:00:00");
+      var now = new Date();
+      var days = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
+      var target = document.getElementById("daysTogether");
+      target.textContent = days > 0 ? days + " Days" : "Forever Starts Today";
+
+      function setIntroOpen(isOpen) {
+        if (!introOverlay) return;
+        introOverlay.classList.toggle("hide", !isOpen);
+        if (pageBody) {
+          pageBody.classList.toggle("intro-open", isOpen);
+        }
+        if (isOpen && letterBook) {
+          letterBook.classList.remove("open");
+        }
+      }
+
+      if (nextBtn && introOverlay && backBtn) {
+        nextBtn.addEventListener("click", function () {
+          setIntroOpen(false);
+        });
+
+        backBtn.addEventListener("click", function () {
+          setIntroOpen(true);
+        });
+      }
+
+      if (letterBook && turnPageBtn && turnBackBtn) {
+        turnPageBtn.addEventListener("click", function () {
+          letterBook.classList.add("open");
+        });
+
+        turnBackBtn.addEventListener("click", function () {
+          letterBook.classList.remove("open");
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
