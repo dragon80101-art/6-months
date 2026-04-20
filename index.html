@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -436,7 +436,6 @@
       transition: opacity 0.35s ease, transform 0.35s ease;
     }
 
-    .book.open::before,
     .book.open::before {
       opacity: 0.5;
       transform: translateY(10px) scaleX(1.02);
@@ -752,12 +751,21 @@
     }
 
     @media (max-width: 760px) {
+      body {
+        padding: 16px;
+      }
+
+      .intro-overlay {
+        padding: 16px;
+      }
+
       .grid {
         grid-template-columns: 1fr;
       }
 
       .card {
         border-radius: 22px;
+        padding: 20px 16px 26px;
       }
 
       .script-line {
@@ -775,7 +783,11 @@
       }
 
       .book {
-        min-height: 680px;
+        min-height: 620px;
+      }
+
+      .book-page {
+        padding: 18px 16px 74px;
       }
 
       .book-gif {
@@ -798,6 +810,136 @@
       .book-title-wrap::before,
       .book-title-wrap::after {
         top: -12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 10px;
+      }
+
+      .intro-overlay {
+        padding: 10px;
+      }
+
+      .prompt-box {
+        width: 100%;
+        min-height: auto;
+        max-height: 90dvh;
+        border-radius: 22px;
+        padding: 16px 14px 18px;
+        overflow-y: auto;
+      }
+
+      .prompt-box::before {
+        inset: 7px;
+      }
+
+      .prompt-gif {
+        width: clamp(138px, 56vw, 186px);
+        margin-bottom: 10px;
+      }
+
+      .prompt-middle {
+        gap: 8px;
+      }
+
+      .next-btn {
+        width: min(230px, 100%);
+      }
+
+      .back-btn {
+        top: 8px;
+        right: 8px;
+        padding: 8px 12px;
+      }
+
+      .glow {
+        width: 220px;
+        height: 220px;
+      }
+
+      .card {
+        border-radius: 18px;
+        padding: 16px 12px 20px;
+      }
+
+      .card::before {
+        inset: 6px;
+        border-radius: 14px;
+      }
+
+      .badge {
+        font-size: 0.72rem;
+        letter-spacing: 0.04em;
+        padding: 7px 10px;
+      }
+
+      .subtitle {
+        line-height: 1.6;
+        margin-bottom: 18px;
+      }
+
+      .tile {
+        padding: 14px;
+      }
+
+      .book {
+        min-height: 560px;
+      }
+
+      .book-page {
+        border-radius: 14px;
+        padding: 14px 12px 68px;
+      }
+
+      .book-front-content {
+        gap: 8px;
+      }
+
+      .book-title-wrap {
+        width: 100%;
+        padding: 14px clamp(74px, 23vw, 90px) 0;
+      }
+
+      .book-gif {
+        width: clamp(70px, 23vw, 92px);
+        top: -10px;
+      }
+
+      .book-gif-left {
+        left: 0;
+      }
+
+      .book-gif-right {
+        right: 0;
+      }
+
+      .book-caption {
+        max-width: 100%;
+        font-size: 0.93rem;
+        line-height: 1.58;
+      }
+
+      .page-btn {
+        padding: 10px 16px;
+      }
+
+      .page-nav-btn {
+        bottom: 14px;
+      }
+
+      .letter-title {
+        font-size: clamp(1.25rem, 5vw, 1.55rem);
+      }
+
+      .letter-paragraph {
+        font-size: 0.94rem;
+        line-height: 1.62;
+      }
+
+      .letter-signoff {
+        font-size: 0.94rem;
       }
     }
 
