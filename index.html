@@ -1507,6 +1507,54 @@
         display: none;
       }
 
+      .flower-overlay,
+      .music-overlay,
+      .israel-overlay {
+        padding: 12px;
+        align-items: start;
+        overflow-y: auto;
+      }
+
+      .flower-page,
+      .music-page,
+      .israel-page {
+        margin: 8px 0 18px;
+        max-height: calc(100dvh - 24px);
+        overflow-y: auto;
+      }
+
+      .flower-vertical-box {
+        width: min(320px, 100%);
+        height: min(420px, 54dvh);
+      }
+
+      .music-title {
+        font-size: clamp(1.3rem, 5vw, 1.9rem);
+      }
+
+      .israel-photo {
+        max-height: 54dvh;
+      }
+
+      .side-flag-btn {
+        top: auto;
+        left: 10px;
+        bottom: 14px;
+        transform: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+      }
+
+      .side-flag-btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .side-flag-img {
+        width: 24px;
+        height: 18px;
+      }
+
     }
 
     @media (max-width: 480px) {
@@ -1561,6 +1609,47 @@
         height: 72px;
         border-radius: 20px;
         font-size: 2rem;
+      }
+
+      .flower-page,
+      .music-page,
+      .israel-page {
+        border-radius: 18px;
+        padding: 12px 10px 14px;
+      }
+
+      .flower-vertical-box {
+        width: min(270px, 100%);
+        height: min(340px, 48dvh);
+        border-width: 4px;
+      }
+
+      .flower-name {
+        font-size: 1.05rem;
+      }
+
+      .flower-subtext {
+        font-size: 0.9rem;
+      }
+
+      .music-close-btn,
+      .flower-close-btn,
+      .israel-close-btn {
+        padding: 8px 14px;
+        font-size: 0.82rem;
+      }
+
+      .side-flag-btn {
+        left: 8px;
+        bottom: 10px;
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+      }
+
+      .side-flag-img {
+        width: 22px;
+        height: 16px;
       }
 
       .glow {
