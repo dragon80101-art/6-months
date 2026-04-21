@@ -984,6 +984,14 @@
       outline-offset: 4px;
     }
 
+    .symbol-note {
+      display: none;
+      color: #7d4f57;
+      font-size: 0.9rem;
+      text-align: center;
+      letter-spacing: 0.01em;
+    }
+
     .music-overlay {
       position: fixed;
       inset: 0;
@@ -1196,6 +1204,32 @@
       .book-title-wrap::after {
         top: -12px;
       }
+
+      .symbol-dock {
+        left: 50%;
+        top: auto;
+        bottom: 14px;
+        transform: translate(-50%, 14px);
+        grid-auto-flow: column;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .symbol-dock.is-visible {
+        transform: translate(-50%, 0);
+      }
+
+      .symbol-box {
+        width: 88px;
+        height: 88px;
+        border-radius: 24px;
+        font-size: 2.4rem;
+      }
+
+      .symbol-note {
+        display: block;
+        grid-column: 1 / -1;
+      }
     }
 
     @media (max-width: 480px) {
@@ -1241,7 +1275,19 @@
       }
 
       .symbol-dock {
-        left: 51px;
+        bottom: 10px;
+        gap: 10px;
+      }
+
+      .symbol-box {
+        width: 72px;
+        height: 72px;
+        border-radius: 20px;
+        font-size: 2rem;
+      }
+
+      .symbol-note {
+        font-size: 0.82rem;
       }
 
       .glow {
@@ -1537,14 +1583,13 @@ Hein</p>
         </div>
       </div>
     </section>
-
-    <p class="footer">From 20/10/25 to forever.</p>
   </main>
   <div class="symbol-dock" id="symbolDock" aria-label="Decorative symbols">
     <div class="symbol-box" aria-hidden="true">&#127800;</div>
     <button class="symbol-box symbol-box-btn" id="musicSymbolBtn" type="button" aria-label="Open music page">
       &#9835;
     </button>
+    <p class="symbol-note">From 20/10/25 to forever.</p>
   </div>
   <div class="music-overlay" id="musicOverlay" aria-label="Favorite Song Page">
     <section class="music-page">
