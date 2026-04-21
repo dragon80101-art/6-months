@@ -993,6 +993,7 @@
       place-items: center;
       padding: 20px;
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
       background:
         linear-gradient(160deg, rgba(255, 247, 244, 0.56), rgba(255, 235, 231, 0.56)),
@@ -1001,12 +1002,14 @@
       background-position: center;
       background-repeat: no-repeat;
       backdrop-filter: blur(5px);
-      transition: opacity 0.45s ease;
+      transition: opacity 0.45s ease, visibility 0s linear 0.45s;
     }
 
     .flower-overlay.is-open {
       opacity: 1;
+      visibility: visible;
       pointer-events: auto;
+      transition: opacity 0.45s ease, visibility 0s linear 0s;
     }
 
     .flower-love-notes {
@@ -1146,6 +1149,7 @@
       place-items: center;
       padding: 20px;
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
       background:
         linear-gradient(160deg, rgba(255, 247, 244, 0.56), rgba(255, 235, 231, 0.56)),
@@ -1154,12 +1158,14 @@
       background-position: center;
       background-repeat: no-repeat;
       backdrop-filter: blur(5px);
-      transition: opacity 0.45s ease;
+      transition: opacity 0.45s ease, visibility 0s linear 0.45s;
     }
 
     .music-overlay.is-open {
       opacity: 1;
+      visibility: visible;
       pointer-events: auto;
+      transition: opacity 0.45s ease, visibility 0s linear 0s;
     }
 
     .music-page {
@@ -1288,6 +1294,7 @@
       place-items: center;
       padding: 20px;
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
       background:
         linear-gradient(160deg, rgba(255, 247, 244, 0.56), rgba(255, 235, 231, 0.56)),
@@ -1296,12 +1303,20 @@
       background-position: center;
       background-repeat: no-repeat;
       backdrop-filter: blur(5px);
-      transition: opacity 0.45s ease;
+      transition: opacity 0.45s ease, visibility 0s linear 0.45s;
     }
 
     .israel-overlay.is-open {
       opacity: 1;
+      visibility: visible;
       pointer-events: auto;
+      transition: opacity 0.45s ease, visibility 0s linear 0s;
+    }
+
+    .flower-overlay.overlay-instant,
+    .music-overlay.overlay-instant,
+    .israel-overlay.overlay-instant {
+      transition: none !important;
     }
 
     .israel-page {
@@ -1990,6 +2005,22 @@ Hein</p>
         israelOverlay.classList.toggle("is-open", isOpen);
       }
 
+      function closeOverlayImmediate(overlayElement) {
+        if (!overlayElement) return;
+        overlayElement.classList.add("overlay-instant");
+        overlayElement.classList.remove("is-open");
+        void overlayElement.offsetWidth;
+        overlayElement.classList.remove("overlay-instant");
+      }
+
+      function closeMediaOverlaysImmediate(exceptOverlay) {
+        [flowerOverlay, musicOverlay, israelOverlay].forEach(function (overlayElement) {
+          if (overlayElement && overlayElement !== exceptOverlay) {
+            closeOverlayImmediate(overlayElement);
+          }
+        });
+      }
+
       function playFadeSequence(overlayElement) {
         if (!overlayElement) return;
         var card = overlayElement.querySelector(".pre-intro-card");
@@ -2103,8 +2134,7 @@ Hein</p>
 
       if (flowerSymbolBtn) {
         flowerSymbolBtn.addEventListener("click", function () {
-          setMusicPageOpen(false);
-          setIsraelPageOpen(false);
+          closeMediaOverlaysImmediate(flowerOverlay);
           setFlowerPageOpen(true);
         });
       }
@@ -2125,8 +2155,7 @@ Hein</p>
 
       if (musicSymbolBtn) {
         musicSymbolBtn.addEventListener("click", function () {
-          setFlowerPageOpen(false);
-          setIsraelPageOpen(false);
+          closeMediaOverlaysImmediate(musicOverlay);
           setMusicPageOpen(true);
         });
       }
@@ -2139,8 +2168,7 @@ Hein</p>
 
       if (israelFlagBtn) {
         israelFlagBtn.addEventListener("click", function () {
-          setFlowerPageOpen(false);
-          setMusicPageOpen(false);
+          closeMediaOverlaysImmediate(israelOverlay);
           setIsraelPageOpen(true);
         });
       }
