@@ -984,14 +984,6 @@
       outline-offset: 4px;
     }
 
-    .symbol-note {
-      display: none;
-      color: #7d4f57;
-      font-size: 0.9rem;
-      text-align: center;
-      letter-spacing: 0.01em;
-    }
-
     .music-overlay {
       position: fixed;
       inset: 0;
@@ -1090,6 +1082,122 @@
       color: #fff7f8;
       font-size: 1rem;
       text-align: center;
+    }
+
+    .side-flag-btn {
+      position: fixed;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 7;
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      border: 1px solid rgba(112, 40, 54, 0.24);
+      background: linear-gradient(145deg, rgba(255, 249, 248, 0.96), rgba(255, 235, 239, 0.96));
+      box-shadow: 0 10px 20px rgba(112, 40, 54, 0.18);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
+    }
+
+    .side-flag-btn:hover {
+      transform: translateY(-50%) translateY(-2px);
+      filter: brightness(1.03);
+    }
+
+    .side-flag-btn:focus-visible {
+      outline: 3px solid #8a2941;
+      outline-offset: 4px;
+    }
+
+    body.intro-open .side-flag-btn,
+    body.pre-intro-open .side-flag-btn {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .side-flag-img {
+      width: 30px;
+      height: 22px;
+      border-radius: 4px;
+      box-shadow: 0 6px 14px rgba(49, 31, 36, 0.14);
+      display: block;
+    }
+
+    .israel-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 12;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(160deg, rgba(255, 247, 244, 0.56), rgba(255, 235, 231, 0.56)),
+        var(--texture-bg);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      backdrop-filter: blur(5px);
+      transition: opacity 0.45s ease;
+    }
+
+    .israel-overlay.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .israel-page {
+      width: min(980px, 100%);
+      border-radius: 28px;
+      border: 1px solid rgba(112, 40, 54, 0.24);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 244, 243, 0.95)),
+        var(--paper);
+      box-shadow: 0 24px 52px rgba(112, 40, 54, 0.26);
+      padding: clamp(18px, 3vw, 26px);
+      text-align: center;
+    }
+
+    .israel-photo {
+      width: 100%;
+      height: auto;
+      max-height: 70vh;
+      object-fit: contain;
+      border-radius: 18px;
+      border: 1px solid rgba(112, 40, 54, 0.2);
+      box-shadow: 0 14px 28px rgba(112, 40, 54, 0.16);
+      background: rgba(255, 255, 255, 0.75);
+      display: block;
+    }
+
+    .israel-close-btn {
+      margin-top: 14px;
+      border: 1px solid rgba(112, 40, 54, 0.24);
+      background: linear-gradient(125deg, #fff8f8, #ffe9ec);
+      color: #7a2c3a;
+      font-family: "Fredoka", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 0 8px 16px rgba(112, 40, 54, 0.15);
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .israel-close-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+    }
+
+    .israel-close-btn:focus-visible {
+      outline: 2px solid #8a2941;
+      outline-offset: 3px;
     }
 
     @keyframes floatUp {
@@ -1226,10 +1334,6 @@
         font-size: 2.4rem;
       }
 
-      .symbol-note {
-        display: block;
-        grid-column: 1 / -1;
-      }
     }
 
     @media (max-width: 480px) {
@@ -1284,10 +1388,6 @@
         height: 72px;
         border-radius: 20px;
         font-size: 2rem;
-      }
-
-      .symbol-note {
-        font-size: 0.82rem;
       }
 
       .glow {
@@ -1589,7 +1689,6 @@ Hein</p>
     <button class="symbol-box symbol-box-btn" id="musicSymbolBtn" type="button" aria-label="Open music page">
       &#9835;
     </button>
-    <p class="symbol-note">From 20/10/25 to forever.</p>
   </div>
   <div class="music-overlay" id="musicOverlay" aria-label="Favorite Song Page">
     <section class="music-page">
@@ -1609,6 +1708,25 @@ Hein</p>
       <button class="music-close-btn" id="musicCloseBtn" type="button">Back</button>
     </section>
   </div>
+  <button class="side-flag-btn" id="israelFlagBtn" type="button" aria-label="Open Israel image">
+    <img
+      class="side-flag-img"
+      src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Flag_of_Israel.svg"
+      alt="Israel flag"
+      loading="lazy"
+    />
+  </button>
+  <div class="israel-overlay" id="israelOverlay" aria-label="Israel Image Page">
+    <section class="israel-page">
+      <img
+        class="israel-photo"
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Flag_of_the_Prime_Minister_of_Israel.svg/1280px-Flag_of_the_Prime_Minister_of_Israel.svg.png"
+        alt="Flag of the Prime Minister of Israel"
+        loading="lazy"
+      />
+      <button class="israel-close-btn" id="israelCloseBtn" type="button">Back</button>
+    </section>
+  </div>
 
   <script>
     (function () {
@@ -1625,6 +1743,9 @@ Hein</p>
       var musicSymbolBtn = document.getElementById("musicSymbolBtn");
       var musicOverlay = document.getElementById("musicOverlay");
       var musicCloseBtn = document.getElementById("musicCloseBtn");
+      var israelFlagBtn = document.getElementById("israelFlagBtn");
+      var israelOverlay = document.getElementById("israelOverlay");
+      var israelCloseBtn = document.getElementById("israelCloseBtn");
       var letterBook = document.getElementById("letterBook");
       var letterBack = letterBook ? letterBook.querySelector(".book-back") : null;
       var turnPageBtn = document.getElementById("turnPageBtn");
@@ -1665,6 +1786,11 @@ Hein</p>
       function setMusicPageOpen(isOpen) {
         if (!musicOverlay) return;
         musicOverlay.classList.toggle("is-open", isOpen);
+      }
+
+      function setIsraelPageOpen(isOpen) {
+        if (!israelOverlay) return;
+        israelOverlay.classList.toggle("is-open", isOpen);
       }
 
       function playFadeSequence(overlayElement) {
@@ -1719,6 +1845,7 @@ Hein</p>
         if (isOpen && letterBook) {
           clearTextRevealTimer();
           setMusicPageOpen(false);
+          setIsraelPageOpen(false);
           setSymbolDockVisible(false);
           resetLetterTextVisibility();
           letterBook.classList.remove("open");
@@ -1757,6 +1884,7 @@ Hein</p>
       if (letterBook && turnPageBtn && turnBackBtn) {
         turnPageBtn.addEventListener("click", function () {
           setMusicPageOpen(false);
+          setIsraelPageOpen(false);
           setSymbolDockVisible(true);
           resetLetterTextVisibility();
           letterBook.classList.add("open");
@@ -1766,6 +1894,7 @@ Hein</p>
         turnBackBtn.addEventListener("click", function () {
           clearTextRevealTimer();
           setMusicPageOpen(false);
+          setIsraelPageOpen(false);
           setSymbolDockVisible(false);
           resetLetterTextVisibility();
           letterBook.classList.remove("open");
@@ -1783,6 +1912,33 @@ Hein</p>
           setMusicPageOpen(false);
         });
       }
+
+      if (israelFlagBtn) {
+        israelFlagBtn.addEventListener("click", function () {
+          setIsraelPageOpen(true);
+        });
+      }
+
+      if (israelCloseBtn) {
+        israelCloseBtn.addEventListener("click", function () {
+          setIsraelPageOpen(false);
+        });
+      }
+
+      if (israelOverlay) {
+        israelOverlay.addEventListener("click", function (event) {
+          if (event.target === israelOverlay) {
+            setIsraelPageOpen(false);
+          }
+        });
+      }
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          setMusicPageOpen(false);
+          setIsraelPageOpen(false);
+        }
+      });
 
       playFadeSequence(preIntroOverlay);
     })();
