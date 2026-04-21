@@ -6,7 +6,7 @@
   <title>6 Months of Us</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Chewy&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #fff6f1;
@@ -984,6 +984,160 @@
       outline-offset: 4px;
     }
 
+    .flower-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 12;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(160deg, rgba(255, 247, 244, 0.56), rgba(255, 235, 231, 0.56)),
+        var(--texture-bg);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      backdrop-filter: blur(5px);
+      transition: opacity 0.45s ease;
+    }
+
+    .flower-overlay.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .flower-love-notes {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .flower-note {
+      position: absolute;
+      width: clamp(175px, 19vw, 235px);
+      min-height: 72px;
+      border-radius: 26px;
+      border: 1px solid rgba(143, 32, 55, 0.52);
+      background: linear-gradient(145deg, rgba(217, 72, 99, 0.96), rgba(185, 47, 74, 0.96));
+      color: #fff8fa;
+      font-family: "Chewy", "Fredoka", sans-serif;
+      font-size: 1.16rem;
+      line-height: 1.25;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: 0 12px 24px rgba(112, 40, 54, 0.2);
+      text-wrap: balance;
+    }
+
+    .flower-note.n1 { top: 6%; left: 9%; }
+    .flower-note.n2 { top: 24%; left: 13%; }
+    .flower-note.n3 { top: 42%; left: 10%; }
+    .flower-note.n4 { top: 60%; left: 14%; }
+    .flower-note.n5 { top: 78%; left: 11%; }
+    .flower-note.n6 { top: 6%; right: 9%; }
+    .flower-note.n7 { top: 24%; right: 13%; }
+    .flower-note.n8 { top: 42%; right: 10%; }
+    .flower-note.n9 { top: 60%; right: 14%; }
+    .flower-note.n10 { top: 78%; right: 11%; }
+
+    .flower-page {
+      width: min(760px, 100%);
+      position: relative;
+      z-index: 1;
+      border-radius: 28px;
+      border: 1px solid rgba(112, 40, 54, 0.24);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 244, 243, 0.95)),
+        var(--paper);
+      box-shadow: 0 24px 52px rgba(112, 40, 54, 0.26);
+      padding: clamp(18px, 3vw, 26px);
+      text-align: center;
+    }
+
+    .flower-vertical-box {
+      width: min(360px, 100%);
+      height: min(520px, 68vh);
+      margin: 0 auto;
+      border-radius: 18px;
+      border: 5px solid #b92f4a;
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 14px 28px rgba(112, 40, 54, 0.16);
+      padding: 14px 14px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .flower-img-wrap {
+      width: 100%;
+      flex: 1;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .flower-img {
+      width: 122%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .flower-name {
+      margin-top: 10px;
+      color: #8f2037;
+      font-family: "Chewy", "Baloo 2", "Fredoka", sans-serif !important;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      letter-spacing: 0.04em;
+    }
+
+    .flower-subtext {
+      margin-top: 8px;
+      color: #7a2c3a;
+      font-family: "Chewy", "Baloo 2", "Fredoka", sans-serif !important;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    .flower-close-btn {
+      margin-top: 14px;
+      border: 1px solid rgba(112, 40, 54, 0.24);
+      background: linear-gradient(125deg, #fff8f8, #ffe9ec);
+      color: #7a2c3a;
+      font-family: "Fredoka", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 0 8px 16px rgba(112, 40, 54, 0.15);
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .flower-close-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+    }
+
+    .flower-close-btn:focus-visible {
+      outline: 2px solid #8a2941;
+      outline-offset: 3px;
+    }
+
     .music-overlay {
       position: fixed;
       inset: 0;
@@ -1129,7 +1283,7 @@
     .israel-overlay {
       position: fixed;
       inset: 0;
-      z-index: 12;
+      z-index: 13;
       display: grid;
       place-items: center;
       padding: 20px;
@@ -1332,6 +1486,10 @@
         height: 88px;
         border-radius: 24px;
         font-size: 2.4rem;
+      }
+
+      .flower-love-notes {
+        display: none;
       }
 
     }
@@ -1685,10 +1843,41 @@ Hein</p>
     </section>
   </main>
   <div class="symbol-dock" id="symbolDock" aria-label="Decorative symbols">
-    <div class="symbol-box" aria-hidden="true">&#127800;</div>
+    <button class="symbol-box symbol-box-btn" id="flowerSymbolBtn" type="button" aria-label="Open flower page">
+      &#127800;
+    </button>
     <button class="symbol-box symbol-box-btn" id="musicSymbolBtn" type="button" aria-label="Open music page">
       &#9835;
     </button>
+  </div>
+  <div class="flower-overlay" id="flowerOverlay" aria-label="Flower Page">
+    <div class="flower-love-notes" aria-hidden="true">
+      <div class="flower-note n1">You're the kind of person that makes everything around you feel alive</div>
+      <div class="flower-note n2">You're rare in a way that can't be copied</div>
+      <div class="flower-note n3">You make ordinary days feel like spring</div>
+      <div class="flower-note n4">You make things feel safe and warm</div>
+      <div class="flower-note n5">You're the reason things feel brighter</div>
+      <div class="flower-note n6">You're the person I look forward to every day</div>
+      <div class="flower-note n7">You're the best thing that's happened to me</div>
+      <div class="flower-note n8">You're the best part of my day</div>
+      <div class="flower-note n9">You're my favorite thought at the end of the day</div>
+      <div class="flower-note n10">You're the one I'd choose, every single time</div>
+    </div>
+    <section class="flower-page">
+      <div class="flower-vertical-box">
+        <div class="flower-img-wrap">
+          <img
+            class="flower-img"
+            src="https://png.pngtree.com/png-clipart/20220121/ourmid/pngtree-original-simple-hand-painted-flower-thanksgiving-lily-bouquet-png-image_4281270.png"
+            alt="Lily bouquet"
+            loading="lazy"
+          />
+        </div>
+        <p class="flower-name">LILIES</p>
+        <p class="flower-subtext">your favorite flower</p>
+      </div>
+      <button class="flower-close-btn" id="flowerCloseBtn" type="button">Back</button>
+    </section>
   </div>
   <div class="music-overlay" id="musicOverlay" aria-label="Favorite Song Page">
     <section class="music-page">
@@ -1740,6 +1929,9 @@ Hein</p>
       var preIntroNoBtn = document.getElementById("preIntroNoBtn");
       var preIntroNoBackBtn = document.getElementById("preIntroNoBackBtn");
       var symbolDock = document.getElementById("symbolDock");
+      var flowerSymbolBtn = document.getElementById("flowerSymbolBtn");
+      var flowerOverlay = document.getElementById("flowerOverlay");
+      var flowerCloseBtn = document.getElementById("flowerCloseBtn");
       var musicSymbolBtn = document.getElementById("musicSymbolBtn");
       var musicOverlay = document.getElementById("musicOverlay");
       var musicCloseBtn = document.getElementById("musicCloseBtn");
@@ -1786,6 +1978,11 @@ Hein</p>
       function setMusicPageOpen(isOpen) {
         if (!musicOverlay) return;
         musicOverlay.classList.toggle("is-open", isOpen);
+      }
+
+      function setFlowerPageOpen(isOpen) {
+        if (!flowerOverlay) return;
+        flowerOverlay.classList.toggle("is-open", isOpen);
       }
 
       function setIsraelPageOpen(isOpen) {
@@ -1845,6 +2042,7 @@ Hein</p>
         if (isOpen && letterBook) {
           clearTextRevealTimer();
           setMusicPageOpen(false);
+          setFlowerPageOpen(false);
           setIsraelPageOpen(false);
           setSymbolDockVisible(false);
           resetLetterTextVisibility();
@@ -1884,6 +2082,7 @@ Hein</p>
       if (letterBook && turnPageBtn && turnBackBtn) {
         turnPageBtn.addEventListener("click", function () {
           setMusicPageOpen(false);
+          setFlowerPageOpen(false);
           setIsraelPageOpen(false);
           setSymbolDockVisible(true);
           resetLetterTextVisibility();
@@ -1894,6 +2093,7 @@ Hein</p>
         turnBackBtn.addEventListener("click", function () {
           clearTextRevealTimer();
           setMusicPageOpen(false);
+          setFlowerPageOpen(false);
           setIsraelPageOpen(false);
           setSymbolDockVisible(false);
           resetLetterTextVisibility();
@@ -1901,8 +2101,32 @@ Hein</p>
         });
       }
 
+      if (flowerSymbolBtn) {
+        flowerSymbolBtn.addEventListener("click", function () {
+          setMusicPageOpen(false);
+          setIsraelPageOpen(false);
+          setFlowerPageOpen(true);
+        });
+      }
+
+      if (flowerCloseBtn) {
+        flowerCloseBtn.addEventListener("click", function () {
+          setFlowerPageOpen(false);
+        });
+      }
+
+      if (flowerOverlay) {
+        flowerOverlay.addEventListener("click", function (event) {
+          if (event.target === flowerOverlay) {
+            setFlowerPageOpen(false);
+          }
+        });
+      }
+
       if (musicSymbolBtn) {
         musicSymbolBtn.addEventListener("click", function () {
+          setFlowerPageOpen(false);
+          setIsraelPageOpen(false);
           setMusicPageOpen(true);
         });
       }
@@ -1915,6 +2139,8 @@ Hein</p>
 
       if (israelFlagBtn) {
         israelFlagBtn.addEventListener("click", function () {
+          setFlowerPageOpen(false);
+          setMusicPageOpen(false);
           setIsraelPageOpen(true);
         });
       }
@@ -1936,6 +2162,7 @@ Hein</p>
       document.addEventListener("keydown", function (event) {
         if (event.key === "Escape") {
           setMusicPageOpen(false);
+          setFlowerPageOpen(false);
           setIsraelPageOpen(false);
         }
       });
